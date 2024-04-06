@@ -7,6 +7,9 @@
 ## Introduction
 Tara is a powerful node for ComfyUI that integrates Large Language Models (LLMs) to enhance and automate workflow processes. With Tara, you can create complex, intelligent workflows that refine and generate content, manage API keys, and seamlessly integrate various LLMs into your projects.
 
+Currently, Tara supports OpenAI and Grok (all models), with plans to expand support to together.ai and Replicate.
+Note: Mixtral-8x7b-32768 from Groq is quite good anad free to use as of now.
+
 ## Features
 Tara comprises four main nodes:
 
