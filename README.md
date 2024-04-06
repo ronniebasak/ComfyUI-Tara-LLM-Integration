@@ -7,6 +7,9 @@
 ## Introduction
 Tara is a powerful node for ComfyUI that integrates Large Language Models (LLMs) to enhance and automate workflow processes. With Tara, you can create complex, intelligent workflows that refine and generate content, manage API keys, and seamlessly integrate various LLMs into your projects.
 
+Currently, Tara supports OpenAI and Grok (all models), with plans to expand support to together.ai and Replicate.
+Note: Mixtral-8x7b-32768 from Groq is quite good anad free to use as of now.
+
 ## Features
 Tara comprises four main nodes:
 
@@ -22,13 +25,13 @@ Tara can be installed using one of the following methods:
 
 ### Method 1:
 1. Navigate to the `custom_nodes` directory inside the ComfyUI root folder, typically found at `/workspace/ComfyUI/custom_nodes` in Runpod.
-2. Clone this repository using `git clone <repository-url>`.
+2. Clone this repository using `git clone https://github.com/ronniebasak/ComfyUI-Tara-LLM-Integration.git` .
 3. Restart ComfyUI and reload your browser to apply changes.
 
 ### Method 2: (Prerequisite: ComfyUI manager)
 1. Open ComfyUI Manager.
 2. Click "Install via Git URL".
-3. Paste the link of this repository.
+3. Paste the link of this repository ( `https://github.com/ronniebasak/ComfyUI-Tara-LLM-Integration.git` ).
 4. Restart ComfyUI and reload your browser to apply changes.
 
 ## Usage
