@@ -89,7 +89,7 @@ class TaraPrompter:
     RETURN_TYPES = ("STRING", "STRING")
     RETURN_NAMES = ("positive", "negative")
     FUNCTION = "generate_prompt"
-    CATEGORY = "llm"
+    CATEGORY = "tara-llm"
 
     def configure_chat_creation(self, provider, api_key, model, messages, overrides):
         config = get_llm_config()
@@ -157,7 +157,7 @@ class TaraAPIKeyLoader:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("api_key",)
     FUNCTION = "load_api_key"
-    CATEGORY = "llm"
+    CATEGORY = "tara-llm"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -233,7 +233,7 @@ class TaraDaisyChainNode:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("output_text",)
     FUNCTION = "generate_text"
-    CATEGORY = "llm"
+    CATEGORY = "tara-llm"
 
     @classmethod
     def INPUT_TYPES(cls):
