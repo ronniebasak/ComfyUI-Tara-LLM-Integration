@@ -106,7 +106,7 @@ class TaraPrompter:
     def post_process_prompt(self, prompt):
         prompt = prompt.replace("{", "").replace("}", "")
         # Replace colon and comma (JSON-esque formatting)
-        prompt = prompt.replace(":", "").replace(",", "")
+        prompt = prompt.replace("[", "").replace("]", "")
         # Remove all quotes
         prompt = prompt.replace('"', "").replace("'", "")
         # Strip whitespaces
