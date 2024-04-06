@@ -76,8 +76,8 @@ class TaraPrompter:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "api_key": ("STRING", {"multiline": False}),
-                "model": (get_model_names(MODEL_DICT),),
+                "api_key": ("STRING", {"multiline": False, "forceInput": True}),
+                "model": (get_model_names(MODEL_DICT), {"forceInput": True}),
                 "guidance": ("STRING", {"multiline": True}),
                 "prompt_positive": ("STRING", {"multiline": True}),
                 "prompt_negative": ("STRING", {"multiline": True}),
