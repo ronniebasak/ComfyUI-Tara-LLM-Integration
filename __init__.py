@@ -1,20 +1,20 @@
-from .groq_master import (
-    GroqMaster,
-    GroqAPIKeySaver,
-    GroqAPIKeyLoader,
-    GroqDaisyChainNode,
+from .tara_master import (
+    TaraPrompter,
+    TaraAPIKeySaver,
+    TaraAPIKeyLoader,
+    TaraDaisyChainNode,
 )
 
 NODE_CLASS_MAPPINGS = {
-    "groqMaster": GroqMaster,
-    "groqApiKeyLoader": GroqAPIKeyLoader,
-    "groqApiKeySaver": GroqAPIKeySaver,
-    "groqDaisyChainNode": GroqDaisyChainNode,
+    "TaraMaster": TaraPrompter,
+    "TaraApiKeyLoader": TaraAPIKeyLoader,
+    "TaraApiKeySaver": TaraAPIKeySaver,
+    "TaraDaisyChainNode": TaraDaisyChainNode,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "groqMaster": "Groq Master",
-    "groqApiKeyLoader": "Groq API Key Loader",
-    "groqApiKeySaver": "Groq API Key Saver",
-    "groqDaisyChainNode": "Groq Daisy Chain Node",
+    "TaraMaster": "Tara Master",
+    "TaraApiKeyLoader": "Tara API Key Loader",
+    "TaraApiKeySaver": "Tara API Key Saver",
+    "TaraDaisyChainNode": "Tara Daisy Chain Node",
 }
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

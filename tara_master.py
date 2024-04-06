@@ -73,7 +73,7 @@ def get_openai(provider, api_key):
         raise ValueError(f"Unsupported provider: {provider}")
 
 
-class GroqMaster:
+class TaraPrompter:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -153,7 +153,7 @@ class GroqMaster:
         return data["positive"], data["negative"]
 
 
-class GroqAPIKeyLoader:
+class TaraAPIKeyLoader:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("api_key",)
     FUNCTION = "load_api_key"
@@ -185,7 +185,7 @@ class GroqAPIKeyLoader:
             raise FileNotFoundError(f"API key not found in {FILE_NAME}")
 
 
-class GroqAPIKeySaver:
+class TaraAPIKeySaver:
     RETURN_TYPES = ()
     FUNCTION = "save_api_key"
     CATEGORY = "llm"
@@ -229,7 +229,7 @@ class GroqAPIKeySaver:
         return ()
 
 
-class GroqDaisyChainNode:
+class TaraDaisyChainNode:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("output_text",)
     FUNCTION = "generate_text"
