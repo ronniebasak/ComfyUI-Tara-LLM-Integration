@@ -25,13 +25,13 @@ Tara can be installed using one of the following methods:
 
 ### Method 1:
 1. Navigate to the `custom_nodes` directory inside the ComfyUI root folder, typically found at `/workspace/ComfyUI/custom_nodes` in Runpod.
-2. Clone this repository using `git clone <repository-url>`.
+2. Clone this repository using `git clone https://github.com/ronniebasak/ComfyUI-Tara-LLM-Integration.git)` .
 3. Restart ComfyUI and reload your browser to apply changes.
 
 ### Method 2: (Prerequisite: ComfyUI manager)
 1. Open ComfyUI Manager.
 2. Click "Install via Git URL".
-3. Paste the link of this repository.
+3. Paste the link of this repository ( `https://github.com/ronniebasak/ComfyUI-Tara-LLM-Integration.git` ).
 4. Restart ComfyUI and reload your browser to apply changes.
 
 ## Usage
