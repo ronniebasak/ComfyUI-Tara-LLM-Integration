@@ -49,6 +49,13 @@ Securely saves API keys used by Tara nodes.
 - **Input**: Guidance, Prompt, Positive, Negative
 - **Output**: Generated text, suitable for chaining in workflows.
 
+## Working with the Workflow 
+1. Add the `TaraApiKeySaver` to an empty workflow
+2. Select `openai` and enter your openai api key (trial credits available for new users). Queue the prompt. Nothing will happen but it should update config, will work on providing confirmation.
+3. Select `groq` and enter your groq api key (free to obtain as of writing). Queue the prompt.
+4. Clear workflow.
+5. In a new Workflow, use `TaraApiKeyLoader` and it should be able to fetch the keys previously configured. You can also use a `Text _O` or `Primitive` node to enter the API key directly in an workflow and connect that to `TaraPrompter` or `TaraDaisyChainNode`
+
 ## Future Plans
 - Integration with together.ai for collaborative LLM usage.
 - Support for Replicate, enabling access to a broader range of AI models.
