@@ -150,7 +150,7 @@ class TaraPrompter:
         )
 
         print(data)
-        return data["positive"], data["negative"]
+        return self.post_process_prompt(data["positive"]), self.post_process_prompt(data["negative"])
 
 
 class TaraAPIKeyLoader:

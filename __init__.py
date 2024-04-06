@@ -1,4 +1,4 @@
-from .tara_master import (
+from .py.tara_master import (
     TaraPrompter,
     TaraAPIKeySaver,
     TaraAPIKeyLoader,
@@ -12,9 +12,9 @@ NODE_CLASS_MAPPINGS = {
     "TaraDaisyChainNode": TaraDaisyChainNode,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "TaraMaster": "Tara Master",
-    "TaraApiKeyLoader": "Tara API Key Loader",
-    "TaraApiKeySaver": "Tara API Key Saver",
-    "TaraDaisyChainNode": "Tara Daisy Chain Node",
+    "TaraMaster": "Tara LLM Primary Node",
+    "TaraApiKeyLoader": "Tara LLM API Key Loader",
+    "TaraApiKeySaver": "Tara LLM API Key Saver",
+    "TaraDaisyChainNode": "Tara LLM Daisy Chain Node",
 }
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
