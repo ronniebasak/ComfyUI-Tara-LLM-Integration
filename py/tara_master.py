@@ -4,8 +4,6 @@ import os.path
 import os
 
 
-# GROQ_API_KEY = "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"
-
 SERVICE_TO_KEY_FIELD = {
     "openai": "OPENAI_API_KEY",
     "groq": "GROQ_API_KEY",

@@ -6,13 +6,13 @@ from .py.tara_master import (
 )
 
 NODE_CLASS_MAPPINGS = {
-    "TaraMaster": TaraPrompter,
+    "TaraPrompter": TaraPrompter,
     "TaraApiKeyLoader": TaraAPIKeyLoader,
     "TaraApiKeySaver": TaraAPIKeySaver,
     "TaraDaisyChainNode": TaraDaisyChainNode,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "TaraMaster": "Tara LLM Primary Node",
+    "TaraPrompter": "Tara LLM Primary Node",
     "TaraApiKeyLoader": "Tara LLM API Key Loader",
     "TaraApiKeySaver": "Tara LLM API Key Saver",
     "TaraDaisyChainNode": "Tara LLM Daisy Chain Node",
