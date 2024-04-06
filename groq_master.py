@@ -16,20 +16,31 @@ SERVICE_TO_KEY_FIELD = {
 FILE_NAME = "API_KEYS.json"
 
 MODEL_DICT = {
-    "openai": ["gpt-3.5turbo", "gpt-4-turbo-preview"],
+    "openai": ["gpt-3.5-turbo", "gpt-4-turbo-preview"],
     "groq": ["llama2-70b-4096", "mixtral-8x7b-32768", "gemma-7b-it"],
     "together": ["coming-soon"],
 }
 
 BASE_LLM_CONFIG = {
-    "temperature": 0.4,
-    "max_tokens": 1000,
-    "top_p": 1,
-    "frequency_penalty": 0.3,
-    "response_format": {"type": "json_object"},
-    "presence_penalty": 0,
-    "stream": False,
-    "timeout": 60,
+    "MAIN": {
+        "temperature": 0.4,
+        "max_tokens": 1000,
+        "top_p": 1,
+        "frequency_penalty": 0,
+        "response_format": {"type": "json_object"},
+        "presence_penalty": 0,
+        "stream": False,
+        "timeout": 60,
+    },
+    "DAISY_CHAIN": {
+        "temperature": 0.4,
+        "max_tokens": 1000,
+        "top_p": 1,
+        "frequency_penalty": 0.3,
+        "presence_penalty": 0,
+        "stream": False,
+        "timeout": 60,
+    },
 }
 
 META_PROMPT = """Use a JSON format for the output in the below format
@@ -43,6 +54,23 @@ def get_model_names(model_dict):
         for model in models:
             model_list.append(f"{provider}/{model}")
     return model_list
+
+
+def get_llm_config(variant="MAIN", overrides={}):
+    return {
+        **BASE_LLM_CONFIG[variant],
+        **overrides,
+    }
+
+
+def get_openai(provider, api_key):
+    if provider == "groq":
+        return openai.OpenAI(base_url="https://api.groq.com/openai/v1", api_key=api_key)
+    elif provider == "openai":
+        return openai.OpenAI(api_key=api_key)
+    # Add more providers as needed
+    else:
+        raise ValueError(f"Unsupported provider: {provider}")
 
 
 class GroqMaster:
@@ -64,37 +92,29 @@ class GroqMaster:
     CATEGORY = "llm"
 
     def configure_chat_creation(self, provider, api_key, model, messages, overrides):
-        config = {
-            **BASE_LLM_CONFIG,
-            **overrides,
-        }
+        config = get_llm_config()
         config["stream"] = False
 
-        print("proivder", provider)
-
-        if provider == "groq":
-            oai = openai.OpenAI(
-                base_url="https://api.groq.com/openai/v1", api_key=api_key
-            )
-            response = oai.chat.completions.create(
-                model=model,
-                messages=messages,
-                **config,
-            )
-
-        elif provider == "openai":
-            oai = openai.OpenAI(api_key=api_key)
-            response = oai.chat.completions.create(
-                model=model,
-                messages=messages,
-                **config,
-            )
-        # Add more providers as needed
-        else:
-            raise ValueError(f"Unsupported provider: {provider}")
+        oai = get_openai(provider, api_key)
+        response = oai.chat.completions.create(
+            model=model,
+            messages=messages,
+            **config,
+        )
 
         data = orjson.loads(response.choices[0].message.content)
         return data
+
+    def post_process_prompt(self, prompt):
+        prompt = prompt.replace("{", "").replace("}", "")
+        # Replace colon and comma (JSON-esque formatting)
+        prompt = prompt.replace(":", "").replace(",", "")
+        # Remove all quotes
+        prompt = prompt.replace('"', "").replace("'", "")
+        # Strip whitespaces
+        prompt = prompt.strip()
+
+        return prompt
 
     def generate_prompt(
         self, api_key, model, guidance, prompt_positive, prompt_negative
@@ -103,11 +123,11 @@ class GroqMaster:
         msgs = [
             {
                 "role": "system",
-                "content": META_PROMPT,
+                "content": f"""{META_PROMPT}\n\nUse the below guidance and prompts to generate a positive and negative prompt. The positive prompt describes features we want, and the negative describes things we don't want.\n\nGuidelines: {guidance}""",
             },
             {
                 "role": "user",
-                "content": f"""Guidance: {guidance}\n\nPositive Prompt: {prompt_positive}\n\nNegative Prompt: {prompt_negative}""",
+                "content": f"""Provided Positive Prompt: {prompt_positive}\n\nProvided Negative Prompt: {prompt_negative}""",
             },
         ]
 
@@ -125,13 +145,15 @@ class GroqMaster:
         provider, model_name = tuple(model.split("/")[:2])
         print("Data", model, provider, api_key, msgs, overrides)
 
-        data = self.configure_chat_creation(provider, api_key, model_name, msgs, overrides)
+        data = self.configure_chat_creation(
+            provider, api_key, model_name, msgs, overrides
+        )
 
         print(data)
         return data["positive"], data["negative"]
 
 
-class GroqAPIKeyLoader:        
+class GroqAPIKeyLoader:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("api_key",)
     FUNCTION = "load_api_key"
@@ -141,22 +163,15 @@ class GroqAPIKeyLoader:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "provider": (
-                    [
-                        "groq",
-                        "openai",
-                        "together",
-                        # Add more services here as needed
-                    ],
-                ),
+                "model": (get_model_names(MODEL_DICT), {"forceInput": True}),
                 "temporary": ("BOOLEAN", {"default": False}),
             }
         }
 
-
     # Rest of the class remains the same...
 
-    def load_api_key(self, provider, temporary):
+    def load_api_key(self, model, temporary):
+        provider = model.split("/")[0]
         base = os.path.dirname(__file__)
         if temporary:
             base = "/tmp"
@@ -175,7 +190,6 @@ class GroqAPIKeySaver:
     FUNCTION = "save_api_key"
     CATEGORY = "llm"
     OUTPUT_NODE = True
-
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -213,3 +227,107 @@ class GroqAPIKeySaver:
             f.write(orjson.dumps(dat).decode("utf-8"))
 
         return ()
+
+
+class GroqDaisyChainNode:
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("output_text",)
+    FUNCTION = "generate_text"
+    CATEGORY = "llm"
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "api_key": ("STRING", {"multiline": False, "forceInput": True}),
+                "model": (get_model_names(MODEL_DICT), {"forceInput": True}),
+                "temperature": ("FLOAT", {"default": 0.4}),
+                "max_tokens": ("INT", {"default": 1000}),
+                "top_p": ("FLOAT", {"default": 1}),
+                "frequency_penalty": ("FLOAT", {"default": 0}),
+                "presence_penalty": ("FLOAT", {"default": 0}),
+                "guidance": ("STRING", {"multiline": True}),
+            },
+            "optional": {
+                "prompt": ("STRING", {"multiline": True, "forceInput": True}),
+                "positive": ("STRING", {"multiline": True, "forceInput": True}),
+                "negative": ("STRING", {"multiline": True, "forceInput": True}),
+            },
+        }
+
+    def configure_chat_creation(self, provider, api_key, model, messages, overrides):
+        config = get_llm_config("DAISY_CHAIN", overrides=overrides)
+        config["stream"] = False
+
+        oai = get_openai(provider, api_key)
+        response = oai.chat.completions.create(
+            model=model,
+            messages=messages,
+            **config,
+        )
+
+        return response.choices[0].message.content
+
+    def generate_text(
+        self,
+        api_key,
+        model,
+        guidance,
+        temperature,
+        max_tokens,
+        top_p,
+        frequency_penalty,
+        presence_penalty,
+        prompt="",
+        positive="",
+        negative="",
+    ):
+        print("DEBUG INPUT DC GUIDANCE:::", guidance)
+        print("DEBUG INPUT DC PROMPT:::", prompt)
+        print("DEBUG INPUT DC POSITIVE:::", positive)
+        print("DEBUG INPUT DC NEGATIVE:::", negative)
+
+        provider, model_name = tuple(model.split("/")[:2])
+
+        overrides = {
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "top_p": top_p,
+            "frequency_penalty": frequency_penalty,
+            "presence_penalty": presence_penalty,
+        }
+
+        msgs = [
+            {
+                "role": "system",
+                "content": guidance,
+            },
+            {
+                "role": "user",
+                "content": f"""Provided Prompt: {prompt}""",
+            },
+        ]
+
+        if positive:
+            msgs.append(
+                {
+                    "role": "user",
+                    "content": f"""Positive: {positive}""",
+                }
+            )
+
+        if negative:
+            msgs.append(
+                {
+                    "role": "user",
+                    "content": f"""Negative: {negative}""",
+                }
+            )
+
+        response = self.configure_chat_creation(
+            provider, api_key, model_name, msgs, overrides
+        )
+
+        print("DEBUG RESPONSE::::: ", response)
+
+        return (response,)
