@@ -61,6 +61,18 @@ def get_llm_config(variant="MAIN", overrides={}):
     }
 
 
+def post_process_prompt(prompt):
+    prompt = prompt.replace("{", "").replace("}", "")
+    # Replace colon and comma (JSON-esque formatting)
+    prompt = prompt.replace("[", "").replace("]", "")
+    # Remove all quotes
+    prompt = prompt.replace('"', "").replace("'", "")
+    # Strip whitespaces
+    prompt = prompt.strip()
+
+    return prompt
+
+
 def get_openai(provider, api_key):
     if provider == "groq":
         return openai.OpenAI(base_url="https://api.groq.com/openai/v1", api_key=api_key)
@@ -103,17 +115,6 @@ class TaraPrompter:
         data = orjson.loads(response.choices[0].message.content)
         return data
 
-    def post_process_prompt(self, prompt):
-        prompt = prompt.replace("{", "").replace("}", "")
-        # Replace colon and comma (JSON-esque formatting)
-        prompt = prompt.replace("[", "").replace("]", "")
-        # Remove all quotes
-        prompt = prompt.replace('"', "").replace("'", "")
-        # Strip whitespaces
-        prompt = prompt.strip()
-
-        return prompt
-
     def generate_prompt(
         self, api_key, model, guidance, prompt_positive, prompt_negative
     ):
@@ -148,7 +149,9 @@ class TaraPrompter:
         )
 
         print(data)
-        return self.post_process_prompt(data["positive"]), self.post_process_prompt(data["negative"])
+        return post_process_prompt(data["positive"]), post_process_prompt(
+            data["negative"]
+        )
 
 
 class TaraAPIKeyLoader:
