@@ -108,8 +108,29 @@ class TaraAdvancedCompositionNode:
                 "negative": ("STRING", {"multiline": True, "forceInput": True}),
             },
         }
+    
 
-    def generate_prompt(
+    @staticmethod
+    def configure_chat_creation(llm_config, messages, overrides):
+        config = get_llm_config(variant="DAISY_CHAIN", overrides=overrides)
+        config["stream"] = False
+
+        oai = openai.OpenAI(
+            base_url=llm_config.base_url,
+            api_key=llm_config.api_key,
+        )
+
+        response = oai.chat.completions.create(
+            model=llm_config.llm_model,
+            messages=messages,
+            **config,
+        )
+
+        data = response.choices[0].message.content
+        return data
+
+
+    def generate_text(
         self,
         llm_config,
         guidance,
@@ -149,19 +170,16 @@ class TaraAdvancedCompositionNode:
             "top_p": llm_config.top_p,
             "frequency_penalty": llm_config.frequency_penalty,
             "presence_penalty": llm_config.presence_penalty,
-            "response_format": {"type": "json_object"},
             "seed": llm_config.seed,
             "stream": False,
             "timeout": llm_config.timeout,
         }
 
-        data = TaraPrompterAdvancedNode.configure_chat_creation(
+        data = self.configure_chat_creation(
             llm_config, msgs, overrides
         )
 
-        return post_process_prompt(data["positive"]), post_process_prompt(
-            data["negative"]
-        )
+        return data,
 
 
 class TaraLLMConfigNode:
