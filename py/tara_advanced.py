@@ -3,10 +3,14 @@ import orjson
 import os.path
 import os
 from .tara_llm_config import TaraLLMConfig
-from .tara_master import get_llm_config, META_PROMPT, post_process_prompt, get_model_names, MODEL_DICT
-
-
-
+from .tara_master import (
+    get_llm_config,
+    META_PROMPT,
+    post_process_prompt,
+    get_model_names,
+    MODEL_DICT,
+    TaraAPIKeyLoader,
+)
 
 
 class TaraPrompterAdvancedNode:
@@ -222,11 +226,22 @@ class TaraPresetLLMConfigNode:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "api_key": ("STRING", {"multiline": False, "forceInput": True}),
-                "llm_models": (get_model_names(MODEL_DICT), ),
-            }
+                "llm_models": (get_model_names(MODEL_DICT),),
+                "temperature": ("FLOAT", {"default": 0.4}),
+                "seed": ("INT", {"default": 42}),
+                "max_tokens": ("INT", {"default": 1000}),
+                "top_p": ("FLOAT", {"default": 1}),
+                "frequency_penalty": ("FLOAT", {"default": 0}),
+                "presence_penalty": ("FLOAT", {"default": 0}),
+                "timeout": ("INT", {"default": 60}),
+                "use_loader": ("BOOLEAN", {"default": True}),
+                "loader_temporary": ("BOOLEAN", {"default": False}),
+            },
+            "optional": {
+                "api_key": ("STRING", {"multiline": False, "default": ""}),
+            },
         }
-        
+
     @staticmethod
     def get_base_url_for_provider(provider):
         if provider == "groq":
@@ -236,22 +251,39 @@ class TaraPresetLLMConfigNode:
         else:
             raise ValueError(f"Unsupported provider: {provider}")
 
-
-
-    def get_preset_llm_config(self, api_key, llm_models):
+    def get_preset_llm_config(
+        self,
+        llm_models,
+        temperature,
+        seed,
+        max_tokens,
+        top_p,
+        frequency_penalty,
+        presence_penalty,
+        timeout,
+        use_loader,
+        loader_temporary,
+        api_key="",
+    ):
         provider, llm_model_name = tuple(llm_models.split("/")[:2])
-        
+
+        if use_loader:
+            loader = TaraAPIKeyLoader()
+            (api_key,) = loader.load_api_key(llm_models, loader_temporary)
+
+        print("DEBUG API KEY::", api_key)
+
         return (
             TaraLLMConfig(
                 base_url=self.get_base_url_for_provider(provider),
                 api_key=api_key,
                 llm_model=llm_model_name,
-                temperature=0.4,
-                seed=42,
-                max_tokens=1024,
-                top_p=1.0,
-                frequency_penalty=0.0,
-                presence_penalty=0.0,
-                timeout=60,
+                temperature=temperature,
+                seed=seed,
+                max_tokens=max_tokens,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty,
+                timeout=timeout,
             ),
         )
