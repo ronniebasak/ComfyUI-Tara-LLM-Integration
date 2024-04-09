@@ -1,0 +1,15 @@
+## v0.1 - Tara Introduction
+- TaraPrompter 
+- TaraDaisyChainNode
+- TaraApiKeyLoader
+- TaraApiKeySaver
+
+
+## v0.2 - Tara Advanced
+- TaraPrompterAdvancedNode
+- TaraPresetLLMConfigNode
+- TaraAdvancedCompositionNode
+- ~TaraPrompter~ Deprecated
+- ~TaraDaisyChainNode~ Deprecated
+- Complete LLM Comfiguration Support except for things like logit_bias which are not supported by all the LLMs
+

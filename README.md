@@ -71,6 +71,8 @@ Securely saves API keys used by Tara nodes.
 We welcome contributions to Tara! If you have suggestions or improvements, please fork the repository and submit a pull request.
 
 ## Disclaimer
+Each LLM and Service (even Open Source ones) have their respective ToS, before using it with tara, you are agreeing with all of their ToS.
+
 When using Tara with a hosted ComfyUI service, there is an option to save the API key temporarily. This action stores the key in the `/tmp` directory, which is typically auto-deleted on Linux-based systems. However, this might pose a risk if the server is shared among multiple users, as one person's API key could potentially overwrite another's. As Tara is in its alpha version, addressing bugs is our priority. In the meantime, users may opt to input the API key as a text (or primitive) node; this method ensures the API key is never saved on the server. When using a primitive node, remember to collapse it during screen recording or sharing to protect your API key.
 
 ## License
