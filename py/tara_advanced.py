@@ -66,7 +66,13 @@ class TaraPrompterAdvancedNode:
             },
             {
                 "role": "user",
-                "content": f"""Provided Positive Prompt: {prompt_positive}{f"\n\nProvided Negative Prompt: {prompt_negative}" if  prompt_negative else ""}""",
+                "content": "Provided Positive Prompt: "
+                + str(prompt_positive)
+                + (
+                    "\n\nProvided Negative Prompt: " + str(prompt_negative)
+                    if prompt_negative
+                    else ""
+                ),
             },
         ]
 
@@ -108,7 +114,6 @@ class TaraAdvancedCompositionNode:
                 "negative": ("STRING", {"multiline": True, "forceInput": True}),
             },
         }
-    
 
     @staticmethod
     def configure_chat_creation(llm_config, messages, overrides):
@@ -128,7 +133,6 @@ class TaraAdvancedCompositionNode:
 
         data = response.choices[0].message.content
         return data
-
 
     def generate_text(
         self,
@@ -175,11 +179,9 @@ class TaraAdvancedCompositionNode:
             "timeout": llm_config.timeout,
         }
 
-        data = self.configure_chat_creation(
-            llm_config, msgs, overrides
-        )
+        data = self.configure_chat_creation(llm_config, msgs, overrides)
 
-        return data,
+        return (data,)
 
 
 class TaraLLMConfigNode:
