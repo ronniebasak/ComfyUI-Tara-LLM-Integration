@@ -13,3 +13,6 @@
 - ~TaraDaisyChainNode~ Deprecated
 - Complete LLM Comfiguration Support except for things like logit_bias which are not supported by all the LLMs
 
+
+## v0.2.1 - Adds new LLMs
+- LLama 3 models added via Groq
