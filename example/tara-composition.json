@@ -1,0 +1,2015 @@
+{
+  "last_node_id": 72,
+  "last_link_id": 163,
+  "nodes": [
+    {
+      "id": 28,
+      "type": "Reroute",
+      "pos": [
+        3823,
+        1196
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 44,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 31,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3948,
+        1229
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 40,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "nsfw"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "Anything Everywhere",
+      "pos": [
+        4596,
+        -98
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "LATENT",
+          "type": "*",
+          "link": 50,
+          "slot_index": 0,
+          "color_on": "#FF9CF9"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Anything Everywhere",
+        "group_restricted": 0,
+        "color_restricted": 0
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 34,
+      "type": "EmptyLatentImage",
+      "pos": [
+        4191.0215390625,
+        -85.7291218749998
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 21,
+      "type": "KSampler (Efficient)",
+      "pos": [
+        3756,
+        185
+      ],
+      "size": {
+        "0": 320.0628356933594,
+        "1": 629.4352416992188
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 37
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 39
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler (Efficient)"
+      },
+      "widgets_values": [
+        787595506340369,
+        null,
+        6,
+        1.5,
+        "dpmpp_sde",
+        "karras",
+        1,
+        "auto",
+        "true"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1
+    },
+    {
+      "id": 3,
+      "type": "TaraApiKeyLoader",
+      "pos": [
+        -43,
+        -195
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "COMBO",
+          "link": null,
+          "widget": {
+            "name": "model"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "api_key",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TaraApiKeyLoader"
+      },
+      "widgets_values": [
+        "groq/llama3-70b-8192",
+        false
+      ]
+    },
+    {
+      "id": 29,
+      "type": "Reroute",
+      "pos": [
+        286,
+        1197
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 111,
+          "slot_index": 0,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": [
+            109
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 16,
+      "type": "Reroute",
+      "pos": [
+        868,
+        -42
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 121
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "TARA_LLM_CONFIG",
+          "links": [
+            29,
+            122
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 19,
+      "type": "Reroute",
+      "pos": [
+        1775.5084056445316,
+        -23.977719160156084
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 29,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "TARA_LLM_CONFIG",
+          "links": [
+            129
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 23,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3503,
+        192
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 132,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 26,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3520,
+        253
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 133,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 33,
+      "type": "Reroute",
+      "pos": [
+        2352,
+        1216
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 45,
+          "slot_index": 0,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 57,
+      "type": "TaraPresetLLMConfig",
+      "pos": [
+        -837,
+        178
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "llm_config",
+          "type": "TARA_LLM_CONFIG",
+          "links": [
+            114,
+            121
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TaraPresetLLMConfig"
+      },
+      "widgets_values": [
+        "groq/llama3-70b-8192",
+        0.4,
+        1852,
+        "randomize",
+        1000,
+        1,
+        0,
+        0,
+        60,
+        true,
+        false,
+        ""
+      ]
+    },
+    {
+      "id": 30,
+      "type": "Reroute",
+      "pos": [
+        3830,
+        1151
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 109,
+          "slot_index": 0,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": [
+            41
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 32,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3943,
+        1194
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 41,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            49
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "portrait"
+      ]
+    },
+    {
+      "id": 56,
+      "type": "TaraAdvancedComposition",
+      "pos": [
+        388,
+        145
+      ],
+      "size": {
+        "0": 734.666259765625,
+        "1": 690.9620971679688
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "llm_config",
+          "type": "TARA_LLM_CONFIG",
+          "link": 114,
+          "slot_index": 0
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "positive",
+          "type": "STRING",
+          "link": 115,
+          "widget": {
+            "name": "positive"
+          }
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": 116,
+          "widget": {
+            "name": "negative"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_text",
+          "type": "STRING",
+          "links": [
+            119,
+            120
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TaraAdvancedComposition"
+      },
+      "widgets_values": [
+        "You are an expert Stable Diffusion (image generator) prompt planner.\n\n\nA good prompt for the SDXL stable diffusion model is a meticulously crafted narrative that starts with specifying the image type to set the artistic tone. It then lays out a clear and engaging scene, methodically adding layers of detail about the main subject, the surrounding environment, and their spatial relationships. It should use precise, descriptive language to define the mood, style, and execution, incorporating technical aspects like weight syntax (e.g., \"(smiling:1.1)\") to prioritize certain features. This approach ensures a rich, coherent, and visually compelling image that aligns with the intended vision. It should be only descriptive, avoid any guidance, avoid imperative sentences and remove any such guidance from prompts beforehand. \n\nConversely, a bad prompt lacks clarity and coherence, providing insufficient context or detail. It might jump into specifics without setting the scene, mix incompatible styles or themes, or neglect to specify spatial relationships and relative importance of elements, leading to a fragmented and confusing image. It may also misuse technical tools like weight syntax, resulting in an imbalanced and ineffective visual representation.\n\nThe words to the beginning has a higher weight the words in the end. Stable diffusion models works best when we give them a clear and concise prompt.\n\nFurthermore, we can use various artist, studio, movie names etc to get a likeness to that style. For example, \"painting by Van Gogh\" or \"scene from the movie Up\".\nSome keywords that can be useful (use caution for relevance) are: 4k, ultra hd, masterpiece, cinematic, painting, drawing, sketch, scene, movie, artist, studio, style, trending on ArtStation, DeviantArt, Behance etc.\n\nThe prompt is specific and detailed, guiding the AI to produce a targeted and expressive image. The positive prompt can be descriptive, may contain comma-seperated keywords or sentences that makes sense. Avoid contradictions.\n\nUse parenthesis to highlight specific words or spaces and use a colon followed by an weight to the end of a word or group to increase or decrease weight, for example (red panda:1.2) banana:1.5 or (yellow rose:0.9)\n\nFill in any missing details such as composition, lighting, background, props, art style etc. If any details are vague, try to be specific\n\nIf any style or aesthetic is mentioned, try to find be more in tune with that, for example, if disney is mentioned, we can expand cartoon, 3d, cgi etc. on the other hand, anime would have a contrast, line art, hand-drawn aesthetic\n\nIf a specific aesthetic, style, studio etc is mentioned, it should be accentuated as much as possible, we can increase its weight, and also add other keywords, artists, references to increase its weight\n\n----\n\nYour job is to create a task plan such as defining the subject, pose, spatial relationships etc, be detailed about this. The output must be in english, no matter what other language is used, best-effort translation should be done\n\nBe comparatively brief in your response",
+        "",
+        "portrait",
+        "nsfw"
+      ]
+    },
+    {
+      "id": 58,
+      "type": "TaraAdvancedComposition",
+      "pos": [
+        1136,
+        142
+      ],
+      "size": {
+        "0": 765.072998046875,
+        "1": 689.2440795898438
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "llm_config",
+          "type": "TARA_LLM_CONFIG",
+          "link": 122,
+          "slot_index": 0
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 120,
+          "widget": {
+            "name": "prompt"
+          }
+        },
+        {
+          "name": "positive",
+          "type": "STRING",
+          "link": 123,
+          "widget": {
+            "name": "positive"
+          }
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "negative"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output_text",
+          "type": "STRING",
+          "links": [
+            126,
+            130
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TaraAdvancedComposition"
+      },
+      "widgets_values": [
+        "You are an expert Stable Diffusion (image generator) prompt checker:\n\nA good prompt for the SDXL stable diffusion model is a meticulously crafted narrative that starts with specifying the image type to set the artistic tone. It then lays out a clear and engaging scene, methodically adding layers of detail about the main subject, the surrounding environment, and their spatial relationships. It should use precise, descriptive language to define the mood, style, and execution, incorporating technical aspects like weight syntax (e.g., \"(smiling:1.1)\") to prioritize certain features. This approach ensures a rich, coherent, and visually compelling image that aligns with the intended vision. It should be only descriptive, avoid any guidance, avoid imperative sentences and remove any such guidance from prompts beforehand.\n\nConversely, a bad prompt lacks clarity and coherence, providing insufficient context or detail. It might jump into specifics without setting the scene, mix incompatible styles or themes, or neglect to specify spatial relationships and relative importance of elements, leading to a fragmented and confusing image. It may also misuse technical tools like weight syntax, resulting in an imbalanced and ineffective visual representation.\n\nThe words to the beginning has a higher weight the words in the end. Stable diffusion models works best when we give them a clear and concise prompt. \n\nFurthermore, we can use various artist, studio, movie names etc to get a likeness to that style. For example, \"painting by Van Gogh\" or \"scene from the movie Up\".\nSome keywords that can be useful (use caution for relevance) are: 4k, ultra hd, masterpiece, cinematic, painting, drawing, sketch, scene, movie, artist, studio, style, trending on ArtStation, DeviantArt, Behance etc.\n\nThe prompt is specific and detailed, guiding the AI to produce a targeted and expressive image. The positive prompt can be descriptive, may contain comma-seperated keywords or sentences that makes sense\n\nUse parenthesis to highlight specific words or spaces and use a colon followed by an weight to the end of a word or group to increase or decrease weight, for example (red panda:1.2) banana:1.5 or (yellow rose:0.9)\n\nIf a specific aesthetic, style, studio etc is mentioned, it should be accentuated as much as possible, we can increase its weight, and also add other keywords, artists, references to increase its weight.\n\nFind and remove any logical inconsistencies, confusing terms and contradictions. For example, if more than 1 option is presented for a subject or background, select one that's more appropriate.\n\n------\nIf any style or aesthetic is mentioned, try to find be more in tune with that, for example, if disney is mentioned, we can expand cartoon, 3d, cgi etc. on the other hand, anime would have a contrast, line art, hand-drawn aesthetic\n\nFill in any missing details such as composition, lighting, background, props, art style etc. If any details are vague, try to be specific\n\nAdhere to the input as much as possible\n---\nOnly output the adjusted prompt and no other explanation is needed",
+        "",
+        "portrait",
+        ""
+      ]
+    },
+    {
+      "id": 65,
+      "type": "Image Crop Face",
+      "pos": [
+        1528,
+        -365
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 141
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            161
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CROP_DATA",
+          "type": "CROP_DATA",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image Crop Face"
+      },
+      "widgets_values": [
+        0.25,
+        "haarcascade_frontalface_alt.xml"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1731,
+        -169
+      ],
+      "size": {
+        "0": 413.2734375,
+        "1": 103.88829040527344
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            160
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sdxl/dreamshaperXL_lightningDPMSDE.safetensors"
+      ]
+    },
+    {
+      "id": 67,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        2476,
+        -556
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            158
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+      ]
+    },
+    {
+      "id": 68,
+      "type": "IPAdapterInsightFaceLoader",
+      "pos": [
+        3036,
+        -516
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INSIGHTFACE",
+          "type": "INSIGHTFACE",
+          "links": [
+            159
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterInsightFaceLoader"
+      },
+      "widgets_values": [
+        "CPU"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "IPAdapterUnifiedLoaderFaceID",
+      "pos": [
+        2568,
+        -412
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 160
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            156
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "links": [
+            157
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterUnifiedLoaderFaceID"
+      },
+      "widgets_values": [
+        "FACEID PLUS V2",
+        0.98,
+        "CPU"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "Anything Everywhere3",
+      "pos": [
+        3061,
+        -28
+      ],
+      "size": {
+        "0": 210,
+        "1": 66
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "MODEL",
+          "type": "*",
+          "link": 162,
+          "color_on": "#B39DDB"
+        },
+        {
+          "name": "CLIP",
+          "type": "*",
+          "link": 35,
+          "color_on": "#FFD500"
+        },
+        {
+          "name": "VAE",
+          "type": "*",
+          "link": 36,
+          "color_on": "#FF6E6E"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Anything Everywhere3",
+        "group_restricted": 0,
+        "color_restricted": 0
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 62,
+      "type": "IPAdapterFaceID",
+      "pos": [
+        3376,
+        -336
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 156
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 157,
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 161,
+          "slot_index": 2
+        },
+        {
+          "name": "image_negative",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 158,
+          "slot_index": 5
+        },
+        {
+          "name": "insightface",
+          "type": "INSIGHTFACE",
+          "link": 159,
+          "slot_index": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            162
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterFaceID"
+      },
+      "widgets_values": [
+        1,
+        1,
+        "linear",
+        "concat",
+        0,
+        1,
+        "V only"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "ShowText|pysssss",
+      "pos": [
+        410,
+        899
+      ],
+      "size": {
+        "0": 753.15380859375,
+        "1": 481.74957275390625
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 119,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "Here is a crafted prompt for the SDXL stable diffusion model:\n\n\"A majestic, cinematic portrait of a regal woman, (smiling:1.1) with an enigmatic gaze, adorned in lavish, intricately designed Renaissance-era attire, set against a rich, warm, (golden:1.2) background, reminiscent of a Renaissance painting by Rembrandt, with subtle, soft lighting, and a sense of elegance and refinement, trending on ArtStation.\"\n\nThis prompt aims to evoke a sense of luxury, sophistication, and mystery, while avoiding any NSFW content. The weight syntax is used to emphasize the smile and golden tones, which will help guide the model to produce a visually stunning image."
+      ]
+    },
+    {
+      "id": 43,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1196,
+        895
+      ],
+      "size": {
+        "0": 761.73388671875,
+        "1": 488.926025390625
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 126,
+          "widget": {
+            "name": "text"
+          },
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "Here is the adjusted prompt:\n\n\"A majestic, cinematic portrait of a regal woman, (smiling:1.1) with an enigmatic gaze, adorned in lavish, intricately designed Renaissance-era attire, set against a rich, warm, (golden:1.2) background, reminiscent of a Renaissance painting by Rembrandt, with subtle, soft lighting, and a sense of elegance and refinement, trending on ArtStation.\""
+      ]
+    },
+    {
+      "id": 20,
+      "type": "PrimitiveNode",
+      "pos": [
+        -418,
+        550
+      ],
+      "size": {
+        "0": 428.0453796386719,
+        "1": 76
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            45,
+            116,
+            131
+          ],
+          "widget": {
+            "name": "value"
+          },
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "nsfw"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 25,
+      "type": "Seed Everywhere",
+      "pos": [
+        2300,
+        75
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Seed Everywhere",
+        "group_restricted": 0,
+        "color_restricted": 0
+      },
+      "widgets_values": [
+        678322716955775,
+        "fixed"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "TaraPrompterAdvanced",
+      "pos": [
+        2530,
+        266
+      ],
+      "size": {
+        "0": 888.937744140625,
+        "1": 575.8514404296875
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "llm_config",
+          "type": "TARA_LLM_CONFIG",
+          "link": 129
+        },
+        {
+          "name": "prompt_positive",
+          "type": "STRING",
+          "link": 130,
+          "widget": {
+            "name": "prompt_positive"
+          }
+        },
+        {
+          "name": "prompt_negative",
+          "type": "STRING",
+          "link": 131,
+          "widget": {
+            "name": "prompt_negative"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "links": [
+            132,
+            134
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "links": [
+            133,
+            135
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TaraPrompterAdvanced"
+      },
+      "widgets_values": [
+        "You are a SDXL Prompt Generator\n\nA good prompt for the SDXL stable diffusion model is a meticulously crafted narrative that starts with specifying the image type to set the artistic tone. It then lays out a clear and engaging scene, methodically adding layers of detail about the main subject, the surrounding environment, and their spatial relationships. It should use precise, descriptive language to define the mood, style, and execution, incorporating technical aspects like weight syntax (e.g., \"(smiling:1.1)\") to prioritize certain features. This approach ensures a rich, coherent, and visually compelling image that aligns with the intended vision. It should be only descriptive, avoid any guidance, avoid imperative sentences and remove any such guidance from prompts beforehand.\n\nConversely, a bad prompt lacks clarity and coherence, providing insufficient context or detail. It might jump into specifics without setting the scene, mix incompatible styles or themes, or neglect to specify spatial relationships and relative importance of elements, leading to a fragmented and confusing image. It may also misuse technical tools like weight syntax, resulting in an imbalanced and ineffective visual representation.\n\nThe words to the beginning has a higher weight the words in the end. Stable diffusion models works best when we give them a clear and concise prompt. Only relevant content should be to the beginning (avoid things like \"Create a xyz\" or \"Scene:xyz\"\n\nFurthermore, we can use various artist, studio, movie names etc to get a likeness to that style. For example, \"painting by Van Gogh\" or \"scene from the movie Up\".\nSome keywords that can be useful (use caution for relevance) are: 4k, ultra hd, masterpiece, cinematic, painting, drawing, sketch, scene, movie, artist, studio, style, trending on ArtStation, DeviantArt, Behance etc.\n\nThe prompt is specific and detailed, guiding the AI to produce a targeted and expressive image. The positive prompt can be descriptive, may contain comma-seperated keywords or sentences that makes sense\n\nUse parenthesis to highlight specific words or spaces and use a colon followed by an weight to the end of a word or group to increase or decrease weight, for example (red panda:1.2) banana:1.5 or (yellow rose:0.9)\n\nThe negative prompt should be comma-seperated keywords, and not a sentence. And it should generally describe things we absolutely don't want in an image, if a image is about cartoon, we may put photorealistic in the negative. But if it's about a person, we should not put animal in negative (unless specified) because there are some similarities, in general it should be more qualitative than tangible such as JPEG artifacts, blurry, watermark etc. \n \n\nIf a specific aesthetic, style, studio etc is mentioned, it should be accentuated as much as possible, we should increase its weight (surrealistic:1.4) or (watercolor:2.0) etc., and also add other keywords, artists, references to increase its weight.\n---\nFollow the prompt as closely as possible without violating the guidelines. Generate both an amazing positive and negative prompt",
+        "",
+        "nsfw"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "PrimitiveNode",
+      "pos": [
+        -417,
+        329
+      ],
+      "size": {
+        "0": 436.1824951171875,
+        "1": 145.88241577148438
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            111,
+            115,
+            123
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "value"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "portrait"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 27,
+      "type": "KSampler (Efficient)",
+      "pos": [
+        4100,
+        184
+      ],
+      "size": {
+        "0": 315.222900390625,
+        "1": 629.6509399414062
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 49,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 48,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "seed"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            163
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler (Efficient)"
+      },
+      "widgets_values": [
+        -1,
+        null,
+        6,
+        1.5,
+        "dpmpp_sde",
+        "karras",
+        1,
+        "auto",
+        "true"
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "shape": 1
+    },
+    {
+      "id": 71,
+      "type": "PreviewImage",
+      "pos": [
+        4606.348388671875,
+        318.834092573686
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 163
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 64,
+      "type": "LoadImage",
+      "pos": [
+        1310,
+        -615
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            141
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_cpunx_00001_.png [temp]",
+        "image"
+      ]
+    },
+    {
+      "id": 44,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2509,
+        901
+      ],
+      "size": {
+        "0": 899.8666381835938,
+        "1": 134.41058349609375
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 134,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "A majestic, cinematic portrait of a regal woman, (smiling:1.1) with an enigmatic gaze, adorned in lavish, intricately designed Renaissance-era attire, set against a rich, warm, (golden:1.2) background, reminiscent of a Renaissance painting by Rembrandt, with subtle, soft lighting, and a sense of elegance and refinement, trending on ArtStation."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 45,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2489,
+        1091
+      ],
+      "size": {
+        "0": 894.8009033203125,
+        "1": 83.42179107666016
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 135,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "nsfw, blurry, lowres, jpeg artifacts, watermark, photorealistic"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      29,
+      16,
+      0,
+      19,
+      0,
+      "*"
+    ],
+    [
+      35,
+      22,
+      1,
+      24,
+      1,
+      "CLIP"
+    ],
+    [
+      36,
+      22,
+      2,
+      24,
+      2,
+      "VAE"
+    ],
+    [
+      37,
+      23,
+      0,
+      21,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      39,
+      26,
+      0,
+      21,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      40,
+      28,
+      0,
+      31,
+      1,
+      "STRING"
+    ],
+    [
+      41,
+      30,
+      0,
+      32,
+      1,
+      "STRING"
+    ],
+    [
+      44,
+      33,
+      0,
+      28,
+      0,
+      "*"
+    ],
+    [
+      45,
+      20,
+      0,
+      33,
+      0,
+      "*"
+    ],
+    [
+      48,
+      31,
+      0,
+      27,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      49,
+      32,
+      0,
+      27,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      50,
+      34,
+      0,
+      36,
+      0,
+      "LATENT"
+    ],
+    [
+      109,
+      29,
+      0,
+      30,
+      0,
+      "*"
+    ],
+    [
+      111,
+      7,
+      0,
+      29,
+      0,
+      "*"
+    ],
+    [
+      114,
+      57,
+      0,
+      56,
+      0,
+      "TARA_LLM_CONFIG"
+    ],
+    [
+      115,
+      7,
+      0,
+      56,
+      2,
+      "STRING"
+    ],
+    [
+      116,
+      20,
+      0,
+      56,
+      3,
+      "STRING"
+    ],
+    [
+      119,
+      56,
+      0,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      120,
+      56,
+      0,
+      58,
+      1,
+      "STRING"
+    ],
+    [
+      121,
+      57,
+      0,
+      16,
+      0,
+      "*"
+    ],
+    [
+      122,
+      16,
+      0,
+      58,
+      0,
+      "TARA_LLM_CONFIG"
+    ],
+    [
+      123,
+      7,
+      0,
+      58,
+      2,
+      "STRING"
+    ],
+    [
+      126,
+      58,
+      0,
+      43,
+      0,
+      "STRING"
+    ],
+    [
+      129,
+      19,
+      0,
+      61,
+      0,
+      "TARA_LLM_CONFIG"
+    ],
+    [
+      130,
+      58,
+      0,
+      61,
+      1,
+      "STRING"
+    ],
+    [
+      131,
+      20,
+      0,
+      61,
+      2,
+      "STRING"
+    ],
+    [
+      132,
+      61,
+      0,
+      23,
+      1,
+      "STRING"
+    ],
+    [
+      133,
+      61,
+      1,
+      26,
+      1,
+      "STRING"
+    ],
+    [
+      134,
+      61,
+      0,
+      44,
+      0,
+      "STRING"
+    ],
+    [
+      135,
+      61,
+      1,
+      45,
+      0,
+      "STRING"
+    ],
+    [
+      141,
+      64,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      156,
+      63,
+      0,
+      62,
+      0,
+      "MODEL"
+    ],
+    [
+      157,
+      63,
+      1,
+      62,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      158,
+      67,
+      0,
+      62,
+      5,
+      "CLIP_VISION"
+    ],
+    [
+      159,
+      68,
+      0,
+      62,
+      6,
+      "INSIGHTFACE"
+    ],
+    [
+      160,
+      22,
+      0,
+      63,
+      0,
+      "MODEL"
+    ],
+    [
+      161,
+      65,
+      0,
+      62,
+      2,
+      "IMAGE"
+    ],
+    [
+      162,
+      62,
+      0,
+      24,
+      0,
+      "MODEL"
+    ],
+    [
+      163,
+      27,
+      5,
+      71,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "groupNodes": {}
+  },
+  "version": 0.4
+}
