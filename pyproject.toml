@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-tara-llm-integration"
+description = "Tara is a powerful node for ComfyUI that integrates Large Language Models (LLMs) to enhance and automate workflow processes. With Tara, you can create complex, intelligent workflows that refine and generate content, manage API keys, and seamlessly integrate various LLMs into your projects."
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["orjson", "openai"]
+
+[project.urls]
+Repository = "https://github.com/ronniebasak/ComfyUI-Tara-LLM-Integration"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Tara-LLM-Integration"
+Icon = ""
