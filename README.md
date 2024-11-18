@@ -77,3 +77,7 @@ When using Tara with a hosted ComfyUI service, there is an option to save the AP
 
 ## License
 Tara is released under the GNU General Public License v3.0 (GPLv3).
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ronniebasak/ComfyUI-Tara-LLM-Integration&type=Date)](https://star-history.com/#ronniebasak/ComfyUI-Tara-LLM-Integration&Date)
